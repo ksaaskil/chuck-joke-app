@@ -1,6 +1,6 @@
 # Chuck Norris Joke App
 
-Powered by the [Internet Chuck Norris Database](http://www.icndb.com/api/).
+Powered by [React Native](https://facebook.github.io/react-native/) and the [Internet Chuck Norris Database](http://www.icndb.com/api/).
 
 ## :arrow_forward: Usage
 
