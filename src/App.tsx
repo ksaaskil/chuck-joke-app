@@ -38,7 +38,7 @@ const App = () => {
     <>
       <View style={styles.body}>
         <View style={styles.container}>
-          <Text style={styles.sectionTitle}>Your daily Chuck Norris joke</Text>
+          <Text style={styles.title}>Your daily Chuck Norris joke</Text>
           {err ? (
             <Text style={{...styles.joke, ...styles.error}}>
               Something went horribly wrong, please try again
@@ -60,15 +60,8 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
   body: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.lighter,
     flex: 1,
   },
   container: {
@@ -76,24 +69,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
+  title: {
     fontSize: 24,
     fontWeight: '600',
     color: Colors.black,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
   joke: {
-    margin: 20,
-    width: '80%',
+    padding: 20,
+    width: '100%',
     fontSize: 18,
     fontWeight: '400',
     color: Colors.dark,
@@ -103,17 +86,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     margin: 20,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
   },
 });
 
