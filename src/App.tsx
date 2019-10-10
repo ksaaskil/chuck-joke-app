@@ -12,7 +12,9 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const fetchJoke = async () => {
   console.log(`Fetching new joke`);
-  const fetchResult = await fetch('http://api.icndb.com/jokes/random');
+  const fetchResult = await fetch(
+    'http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]',
+  );
   if (!fetchResult.ok) {
     throw Error(`Failed fetching joke with code: ${fetchResult.status}`);
   }
