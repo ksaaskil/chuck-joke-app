@@ -31,6 +31,7 @@
     "jest-enzyme": "^7.1.1",
     "jest-fetch-mock": "^2.1.2",
     "metro-react-native-babel-preset": "^0.56.0",
+    "node-fetch-polyfill": "^2.0.6",
     "react-dom": "16.9.0-alpha.0",
     "react-native-testing-library": "^1.11.1",
     "react-test-renderer": "16.9.0-alpha.0",

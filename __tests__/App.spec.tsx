@@ -2,13 +2,7 @@ import 'react-native';
 import React from 'react';
 import App from '../src/App';
 
-import {
-  act,
-  render,
-  fireEvent,
-  RenderAPI,
-  waitForElement,
-} from 'react-native-testing-library';
+import {render, RenderAPI, waitForElement} from 'react-native-testing-library';
 
 describe('App with jest-fetch-mock', () => {
   beforeAll(() => {
