@@ -27,9 +27,10 @@ const fetchJoke = async () => {
 const App = () => {
   const [joke, setJoke] = useState('');
   const [err, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const refreshJoke = async () => {
     try {
+      setLoading(true);
       const joke = await fetchJoke();
       setJoke(joke);
       setError(null);
@@ -37,6 +38,8 @@ const App = () => {
     } catch (err) {
       console.error(`Failed fetching joke: ${err.message}`);
       setError(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,13 +52,17 @@ const App = () => {
       <View style={styles.body}>
         <View style={styles.container}>
           <Text style={styles.title}>Your daily Chuck Norris joke</Text>
-          {err ? (
+          {loading ? (
+            <Text style={styles.loading} testID="loading">
+              Loading...
+            </Text>
+          ) : err ? (
             <Text style={{...styles.joke, ...styles.error}} testID="error">
               Something went horribly wrong, please try again!
             </Text>
           ) : (
             <Text style={styles.joke} testID="joke">
-              {joke}
+              {joke ? joke : 'Loading...'}
             </Text>
           )}
           <View style={styles.buttonContainer}>
@@ -92,6 +99,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
     color: Colors.dark,
+    textAlign: 'center',
+  },
+  loading: {
+    color: 'gray',
   },
   error: {
     backgroundColor: 'red',
