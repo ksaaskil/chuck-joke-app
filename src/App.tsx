@@ -13,6 +13,9 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 const fetchJoke = async () => {
   console.log(`Fetching new joke`);
   const fetchResult = await fetch('http://api.icndb.com/jokes/random');
+  if (!fetchResult.ok) {
+    throw Error(`Failed fetching joke with code: ${fetchResult.status}`);
+  }
   const body = await fetchResult.json();
   const joke = body.value.joke;
   console.log(`Got a new joke: ${joke}`);
@@ -30,7 +33,7 @@ const App = () => {
       setError(null);
       console.log(`Set joke: ${joke}`);
     } catch (err) {
-      console.error(`Got error: ${err.message}`);
+      console.error(`Failed fetching joke: ${err.message}`);
       setError(err);
     }
   };
@@ -45,8 +48,8 @@ const App = () => {
         <View style={styles.container}>
           <Text style={styles.title}>Your daily Chuck Norris joke</Text>
           {err ? (
-            <Text style={{...styles.joke, ...styles.error}}>
-              Something went horribly wrong, please try again
+            <Text style={{...styles.joke, ...styles.error}} testID="error">
+              Something went horribly wrong, please try again!
             </Text>
           ) : (
             <Text style={styles.joke} testID="joke">
