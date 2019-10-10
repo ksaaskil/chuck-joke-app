@@ -10,13 +10,19 @@ import {
   waitForElement,
 } from 'react-native-testing-library';
 
-global.fetch = require('jest-fetch-mock');
+describe('App with jest-fetch-mock', () => {
+  beforeAll(() => {
+    global.fetch = require('jest-fetch-mock');
+  });
+  it('renders correctly', async () => {
+    const returnedJoke = 'Some joke';
+    fetch.mockResponse(JSON.stringify({value: {joke: returnedJoke}}));
 
-it('renders correctly', async () => {
-  const returnedJoke = 'Some joke';
-  fetch.mockResponse(JSON.stringify({value: {joke: returnedJoke}}));
+    const renderApi: RenderAPI = render(<App />);
 
-  const renderApi: RenderAPI = render(<App />);
-
-  await waitForElement(() => renderApi.getByText('Some joke'));
+    await waitForElement(() => renderApi.getByText('Some joke'));
+  });
+  afterAll(() => {
+    fetch.mockReset();
+  });
 });
