@@ -11,9 +11,12 @@ import {Button, StyleSheet, View, Text} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const fetchJoke = async () => {
+  console.log(`Fetching new joke`);
   const fetchResult = await fetch('http://api.icndb.com/jokes/random');
   const body = await fetchResult.json();
-  return body.value.joke;
+  const joke = body.value.joke;
+  console.log(`Got a new joke: ${joke}`);
+  return joke;
 };
 
 const App = () => {
@@ -25,7 +28,9 @@ const App = () => {
       const joke = await fetchJoke();
       setJoke(joke);
       setError(null);
+      console.log(`Set joke: ${joke}`);
     } catch (err) {
+      console.error(`Got error: ${err.message}`);
       setError(err);
     }
   };
@@ -44,7 +49,9 @@ const App = () => {
               Something went horribly wrong, please try again
             </Text>
           ) : (
-            <Text style={styles.joke}>{joke}</Text>
+            <Text style={styles.joke} testID="joke">
+              {joke}
+            </Text>
           )}
           <View style={styles.buttonContainer}>
             <Button

@@ -5,8 +5,6 @@ import 'jest-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
 
-global.fetch = require('jest-fetch-mock');
-
 /**
  * Set up DOM in node.js environment for Enzyme to mount to
  */
@@ -28,6 +26,16 @@ global.navigator = {
   userAgent: 'node.js',
 };
 copyProps(window, global);
+
+const originalConsoleError = console.error;
+console.error = message => {
+  if (/^Warning:/.test(message)) {
+    // console.warn(`Silencing false-positive React-Native errors`);
+    return;
+  }
+
+  originalConsoleError(message);
+};
 
 /**
  * Set up Enzyme to mount to DOM, simulate events,

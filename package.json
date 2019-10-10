@@ -10,13 +10,15 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "react": "16.9.0",
+    "debug": "^4.1.1",
+    "react": "16.9.0-alpha.0",
     "react-native": "0.61.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.3",
     "@babel/runtime": "^7.6.3",
     "@react-native-community/eslint-config": "^0.0.5",
+    "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.18",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.9.1",
@@ -29,13 +31,14 @@
     "jest-enzyme": "^7.1.1",
     "jest-fetch-mock": "^2.1.2",
     "metro-react-native-babel-preset": "^0.56.0",
-    "react-dom": "^16.10.2",
+    "react-dom": "16.9.0-alpha.0",
     "react-test-renderer": "16.9.0"
   },
   "jest": {
     "preset": "react-native",
     "setupFilesAfterEnv": [
       "<rootDir>/setup-tests.js"
-    ]
+    ],
+    "testEnvironment": "jsdom"
   }
 }
