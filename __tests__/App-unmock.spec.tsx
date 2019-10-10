@@ -4,7 +4,12 @@ import App from '../src/App';
 
 import unmock, {transform, u} from 'unmock';
 
-import {render, RenderAPI, waitForElement} from 'react-native-testing-library';
+import {
+  fireEvent,
+  render,
+  RenderAPI,
+  waitForElement,
+} from 'react-native-testing-library';
 
 // Required to turn "fetch" calls into Node.js calls that unmock(-node) can intercept
 global.fetch = require('node-fetch-polyfill');
@@ -29,6 +34,20 @@ describe('App with jest-fetch-mock', () => {
     await waitForElement(() => {
       const returnedJoke = icndbApi.spy.getResponseBodyAsJson().value.joke;
       return renderApi.getByText(returnedJoke);
+    });
+  });
+  it('renders new joke after clicking the button', async () => {
+    const icndbApi = unmock.services['icndb'];
+    icndbApi.state(transform.withCodes(200));
+
+    const renderApi: RenderAPI = render(<App />);
+
+    fireEvent.press(renderApi.getByText('Get me a new one'));
+
+    await waitForElement(() => {
+      const secondCall = icndbApi.spy.secondCall;
+      const secondJoke = secondCall.returnValue.bodyAsJson;
+      return renderApi.getByText(secondJoke.value.joke);
     });
   });
   it('renders error when the API fails', async () => {
